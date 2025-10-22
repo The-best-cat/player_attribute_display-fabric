@@ -16,6 +16,6 @@ You can configure the number format of the displayed value:
 * Raw: Default. No changes.
 * Percentage: The value is multiplied by 100 and the % symbol is added.
 
-You can configure the decimal place of the value. It ranges from 0 to 5 (inclusive). If it is 0, the value is just displayed as an integer.
+You can configure the decimal place of the value. It ranges from 0 to 5 (inclusive). If it is 0, the value is just displayed as a rounded integer.
 
 If the value requires certain calculation before being displayed, you can provide a mathematical expression. Use x to represent the original value. Unfortunately, substitution for other dynamic values is not supported at the moment.
