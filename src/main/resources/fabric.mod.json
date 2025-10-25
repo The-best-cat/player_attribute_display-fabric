@@ -8,8 +8,7 @@
 		"The Black Cat"
 	],
 	"contact": {
-		"sources": "https://github.com/The-best-cat/player_attribute_display-fabric",
-        "Modrinth": "https://modrinth.com/project/player-attribute-display"
+		"sources": "https://github.com/The-best-cat/player_attribute_display-fabric"
 	},
 	"license": "MIT",
 	"icon": "assets/player_attribute_display/icon.png",
@@ -30,12 +29,19 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.17.3",
-		"minecraft": "~1.21.7",
+		"minecraft": "~1.21.6",
 		"java": ">=21",
 		"fabric-api": "*",
         "fzzy_config": "0.7.3+1.21.6"
 	},
 	"suggests": {
 		"modmenu": "*"
-	}
+	},
+    "custom": {
+        "modmenu": {
+            "links": {
+                "Modrinth": "https://modrinth.com/project/player-attribute-display"
+            }
+        }
+    }
 }

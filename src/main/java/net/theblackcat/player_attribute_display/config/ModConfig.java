@@ -11,6 +11,9 @@ import me.fzzyhmstrs.fzzy_config.validation.misc.ValidatedAny;
 import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedInt;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
@@ -79,11 +82,26 @@ public class ModConfig extends Config {
             RAW,
             PERCENTAGE;
 
+            public static final PacketCodec<RegistryByteBuf, NumberFormat> PACKET_CODEC = PacketCodec.ofStatic(
+                    (buf, value) -> buf.writeString(value.name()),
+                    buf -> NumberFormat.valueOf(buf.readString())
+            );
+
             @Override
             public @NotNull String prefix() {
                 return PlayerAttributeDisplay.MOD_ID + ".config.config_data.number_format";
             }
         }
+
+        public static final PacketCodec<RegistryByteBuf, AttributeConfigData> PACKET_CODEC = PacketCodec.tuple(
+                Identifier.PACKET_CODEC, data -> data.attributeId.get(),
+                PacketCodecs.STRING, data -> data.prefix,
+                NumberFormat.PACKET_CODEC, data -> data.format,
+                PacketCodecs.INTEGER, data -> data.decimalPlaces.get(),
+                PacketCodecs.STRING, data -> data.unit,
+                PacketCodecs.STRING, data -> data.expression,
+                AttributeConfigData::new
+        );
 
         public AttributeConfigData() {
             this(Identifier.ofVanilla(""), "", NumberFormat.RAW, 0, "", "");

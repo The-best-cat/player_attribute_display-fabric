@@ -7,7 +7,9 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3i;
 import net.theblackcat.player_attribute_display.PlayerAttributeDisplay;
+import net.theblackcat.player_attribute_display.PlayerAttributeDisplayClient;
 import net.theblackcat.player_attribute_display.event.ModKeyBindings;
+import net.theblackcat.player_attribute_display.network.records.AttributeDataResult;
 
 import java.util.List;
 
@@ -15,13 +17,13 @@ public class AttributeScreen extends Screen {
     private final Identifier BACKGROUND = PlayerAttributeDisplay.GetId("textures/gui/attribute_screen.png");
     private final int maxAttribute = 13, gap = 1;
     private final float fontScale = 0.85f;
-    private final List<Text> attributes;
+    private final List<AttributeDataResult> results;
 
     private int x, y, backgroundWidth, backgroundHeight;
 
-    public AttributeScreen(List<Text> texts) {
+    public AttributeScreen(List<AttributeDataResult> results) {
         super(PlayerAttributeDisplay.Translate("screen.title"));
-        this.attributes = texts;
+        this.results = results;
     }
 
     @Override
@@ -40,9 +42,9 @@ public class AttributeScreen extends Screen {
         matrices.pushMatrix();
         matrices.scale(fontScale);
 
-        for (int i = 0; i < Math.min(this.maxAttribute, this.attributes.size()); i++) {
+        for (int i = 0; i < Math.min(this.maxAttribute, this.results.size()); i++) {
             var pos = this.GetBasePos(12 + gap, 24 + (this.textRenderer.fontHeight + gap) * i, fontScale);
-            context.drawText(this.textRenderer, this.attributes.get(i), pos.getX(), pos.getY(), 0xFF373737, false);
+            context.drawText(this.textRenderer, PlayerAttributeDisplayClient.ParseResultToText(this.results.get(i)), pos.getX(), pos.getY(), 0xFF373737, false);
         }
 
         matrices.popMatrix();

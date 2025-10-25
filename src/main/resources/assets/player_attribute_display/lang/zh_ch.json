@@ -1,0 +1,39 @@
+{
+  "key.category.player_attribute_display.main" : "玩家属性面板",
+  "key.player_attribute_display.open_screen" : "开启/关闭",
+
+  "player_attribute_display.screen.title": "玩家属性",
+
+  "player_attribute_display.invalid.repeated_attribute": "重复属性",
+  "player_attribute_display.invalid.invalid_expression": "无效数学表达式",
+  "player_attribute_display.invalid.attribute_not_present": "不存在属性",
+  "player_attribute_display.invalid.dont_have_attribute": "玩家不拥有此属性",
+
+  "player_attribute_display.client_config": "客户端设定",
+  "player_attribute_display.server_config": "伺服器端设定",
+
+  "player_attribute_display.client_config.data": "展示属性",
+  "player_attribute_display.client_config.data.desc": "此列包含你想要在面板上显示的属性，最多可显示13个属性。\n\n请在每个条目中提供属性的ID，并设定小数点位和数字格式。\n\n你可以选择新增前缀和单位，如果希望属性在经过某种计算后显示，你也可以提供数学表达式。",
+
+  "player_attribute_display.server_config.data": "展示属性",
+  "player_attribute_display.server_config.data.desc": "此列包含你想要在面板上显示的属性。\n\n请在每个条目中提供属性的ID，并设定小数点位和数字格式。\n\n你可以选择新增前缀和单位，如果希望属性在经过某种计算后显示，你也可以提供数学表达式。",
+  "player_attribute_display.server_config.disableScreen": "禁用属性面板",
+  "player_attribute_display.server_config.disableScreen.desc": "启用后，所有玩家无法开启属性面板。",
+  "player_attribute_display.server_config.useServerConfig": "使用伺服器端设定",
+  "player_attribute_display.server_config.useServerConfig.desc": "启用后，所有玩家使用伺服器端的设定，包括：\n1. 是否禁用属性面板\n2. 展示的属性",
+
+  "player_attribute_display.config.config_data.attributeId": "属性ID",
+  "player_attribute_display.config.config_data.prefix": "前缀",
+  "player_attribute_display.config.config_data.format": "显示格式",
+  "player_attribute_display.config.config_data.decimalPlaces": "小数点位",
+  "player_attribute_display.config.config_data.unit": "单位",
+  "player_attribute_display.config.config_data.expression": "数学表达式",
+  "player_attribute_display.config.config_data.expression.desc": "输入数学表达式后，属性数值会在经过计算后才被展示。\n\n以x表示原数值，目前暂无法代入其他数值。",
+  "player_attribute_display.config.config_data.number_format.RAW": "不变",
+  "player_attribute_display.config.config_data.number_format.PERCENTAGE": "百分比",
+
+  "player_attribute_display.message.changed_server_config": "%s 已更改属性面板设定，所有玩家将同步设定。",
+
+  "modmenu.nameTranslation.player_attribute_display": "玩家属性面板",
+  "modmenu.descriptionTranslation.player_attribute_display": "新增了一个属性面板，可根据需要自行设定显示的属性。\n\n为了获取最正确的数值，此模组需要客户端与伺服器端沟通，因此在多人游戏中使用必须安装在伺服器上。\n\n更多详情请查看Github。"
+}

@@ -1,5 +1,8 @@
 package net.theblackcat.player_attribute_display.screen;
 
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.util.Identifier;
 
 public class AttributeData {
@@ -18,4 +21,14 @@ public class AttributeData {
         this.unit = unit;
         this.expression = expression;
     }
+
+    public static final PacketCodec<RegistryByteBuf, AttributeData> PACKET_CODEC = PacketCodec.tuple(
+            PacketCodecs.STRING, data -> data.prefix,
+            Identifier.PACKET_CODEC, data -> data.attributeId,
+            PacketCodecs.BOOLEAN, data -> data.percentage,
+            PacketCodecs.INTEGER, data -> data.decimalPlaces,
+            PacketCodecs.STRING, data -> data.unit,
+            PacketCodecs.STRING, data -> data.expression,
+            AttributeData::new
+    );
 }

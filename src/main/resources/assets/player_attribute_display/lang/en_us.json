@@ -4,7 +4,8 @@
 
   "player_attribute_display.screen.title": "Player Attributes",
 
-  "player_attribute_display.invalid.invalid_expression": "Invalid mathematical expression",
+  "player_attribute_display.invalid.repeated_attribute": "Repeated attribute",
+  "player_attribute_display.invalid.invalid_expression": "Invalid math. expression",
   "player_attribute_display.invalid.attribute_not_present": "Attribute doesn't exist",
   "player_attribute_display.invalid.dont_have_attribute": "You don't have this attribute",
 
@@ -12,14 +13,14 @@
   "player_attribute_display.server_config": "Server Configuration",
 
   "player_attribute_display.client_config.data": "Display Attributes",
-  "player_attribute_display.client_config.data.desc": "This list contains attributes you want to display on the screen, 13 attributes can be displayed at most.\n\nIn each entry, please provide the identifier of the attribute, and configure the decimal place and the number format.\n\nYou can optionally add a prefix and a unit. If you want the attribute value to be displayed after a certain calculation, you can also provide a mathematical expression.",
+  "player_attribute_display.client_config.data.desc": "This list contains attributes you want to display on the panel, 13 attributes can be displayed at most.\n\nIn each entry, please provide the identifier of the attribute, and configure the decimal place and the number format.\n\nYou can optionally add a prefix and a unit. If you want the attribute value to be displayed after a certain calculation, you can also provide a mathematical expression.",
 
   "player_attribute_display.server_config.data": "Display Attributes",
-  "player_attribute_display.server_config.data.desc": "This list contains attributes you want to display on the screen.\n\nIn each entry, please provide the identifier of the attribute, and configure the decimal place and the number format.\n\nYou can optionally add a prefix and a unit. If you want the attribute value to be displayed after a certain calculation, you can also provide a mathematical expression.",
-  "player_attribute_display.server_config.disableScreen": "Disable screen",
-  "player_attribute_display.server_config.useServerConfig.desc": "If turned on, all players will not be able to open the attribute screen.",
+  "player_attribute_display.server_config.data.desc": "This list contains attributes you want to display on the panel.\n\nIn each entry, please provide the identifier of the attribute, and configure the decimal place and the number format.\n\nYou can optionally add a prefix and a unit. If you want the attribute value to be displayed after a certain calculation, you can also provide a mathematical expression.",
+  "player_attribute_display.server_config.disableScreen": "Disable panel",
+  "player_attribute_display.server_config.useServerConfig.desc": "If turned on, all players will not be able to open the attribute panel.",
   "player_attribute_display.server_config.useServerConfig": "Use server configuration",
-  "player_attribute_display.server_config.disableScreen.desc": "If turned on, all players will use the server's configuration including:\n1. Whether the attribute screen is disabled\n2. The attributes to be displayed",
+  "player_attribute_display.server_config.disableScreen.desc": "If turned on, all players will use the server's configuration including:\n1. Whether the attribute panel is disabled\n2. The attributes to be displayed",
 
   "player_attribute_display.config.config_data.attributeId": "Attribute ID",
   "player_attribute_display.config.config_data.prefix": "Prefix",
@@ -30,6 +31,8 @@
   "player_attribute_display.config.config_data.expression.desc": "If an expression is provided, the attribute value will be calculated before being displayed.\n\nUse x to represent the original value. Substitution is not supported at the moment.",
   "player_attribute_display.config.config_data.number_format.RAW": "Raw",
   "player_attribute_display.config.config_data.number_format.PERCENTAGE": "Percentage",
+
+  "player_attribute_display.message.changed_server_config": "%s has changed the attribute display configuration. It will be synchronized to all players.",
 
   "modmenu.nameTranslation.player_attribute_display": "Player Attribute Display",
   "modmenu.descriptionTranslation.player_attribute_display": "This mod adds a panel that displays a configurable list of attribute values.\n\nTo obtain the most accurate values, this mod requires communication between the client and the server, so it must be installed on the server in multi-player.\n\nFor more details, please see Github README."

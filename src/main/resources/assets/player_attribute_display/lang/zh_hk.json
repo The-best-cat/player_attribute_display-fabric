@@ -4,6 +4,7 @@
 
   "player_attribute_display.screen.title": "玩家屬性",
 
+  "player_attribute_display.invalid.repeated_attribute": "重複屬性",
   "player_attribute_display.invalid.invalid_expression": "無效數學表達式",
   "player_attribute_display.invalid.attribute_not_present": "不存在屬性",
   "player_attribute_display.invalid.dont_have_attribute": "玩家不擁有此屬性",
@@ -12,14 +13,14 @@
   "player_attribute_display.server_config": "伺服器端設定",
 
   "player_attribute_display.client_config.data": "展示屬性",
-  "player_attribute_display.client_config.data.desc": "此列包含你想要在面板上顯示的屬性，最多可顯示13個屬性。\n\n請在每個條目中提供屬性的ID，並設定小數點位和數字格式。\n\n你可以選擇新增前綴和單位，如果希望屬性在經過某種計算後顯示，你也可以提供數學表達式。",
+  "player_attribute_display.client_config.data.desc": "此列包含你想顯示喺面板上嘅屬性，最多顯示13個。\n\n請於每個條目中提供屬性ID，並設定小數點位同數字格式。\n\n你可以選擇增加前綴同單位，如果希望屬性喺經過特定計算後先至顯示出嚟，你亦可以提供一條數學式。",
 
   "player_attribute_display.server_config.data": "展示屬性",
-  "player_attribute_display.server_config.data.desc": "此列包含你想要在面板上顯示的屬性。\n\n請在每個條目中提供屬性的ID，並設定小數點位和數字格式。\n\n你可以選擇新增前綴和單位，如果希望屬性在經過某種計算後顯示，你也可以提供數學表達式。",
+  "player_attribute_display.server_config.data.desc": "此列包含你想顯示喺面板上嘅屬性，最多顯示13個。\n\n請於每個條目中提供屬性ID，並設定小數點位同數字格式。\n\n你可以選擇增加前綴同單位，如果希望屬性喺經過特定計算後先至顯示出嚟，你亦可以提供一條數學式。",
   "player_attribute_display.server_config.disableScreen": "禁用屬性面板",
   "player_attribute_display.server_config.disableScreen.desc": "啓用後，所有玩家無法開啓屬性面板。",
   "player_attribute_display.server_config.useServerConfig": "使用伺服器端設定",
-  "player_attribute_display.server_config.useServerConfig.desc": "啓用後，所有玩家使用伺服器端的設定，包括：\n1. 是否禁用屬性面板\n2. 展示的屬性",
+  "player_attribute_display.server_config.useServerConfig.desc": "啓用後，所有玩家使用伺服器端嘅設定，包括：\n1. 是否禁用屬性面板\n2. 展示嘅屬性",
 
   "player_attribute_display.config.config_data.attributeId": "屬性ID",
   "player_attribute_display.config.config_data.prefix": "前綴",
@@ -27,10 +28,12 @@
   "player_attribute_display.config.config_data.decimalPlaces": "小數點位",
   "player_attribute_display.config.config_data.unit": "單位",
   "player_attribute_display.config.config_data.expression": "數學表達式",
-  "player_attribute_display.config.config_data.expression.desc": "輸入數學表達式後，屬性數值會在經過計算後才被展示。\n\n以x表示原數值，目前暫無法代入其他數值。",
+  "player_attribute_display.config.config_data.expression.desc": "如有，屬性數值會喺經過計算後先至顯示出嚟。\n\n以x表示原數值，目前暫時無法代入其他數值。",
   "player_attribute_display.config.config_data.number_format.RAW": "不變",
   "player_attribute_display.config.config_data.number_format.PERCENTAGE": "百分比",
 
+  "player_attribute_display.message.changed_server_config": "%s 已更改屬性面板設定，所有玩家將同步設定。",
+
   "modmenu.nameTranslation.player_attribute_display": "玩家屬性面板",
-  "modmenu.descriptionTranslation.player_attribute_display": "新增了一個屬性面板，可根據需要自行設定顯示的屬性。\n\n爲了獲取最正確的數值，此模組需要客戶端與伺服器端溝通，因此在多人游戲中使用必須安裝在伺服器上。\n\n更多詳情請查看Github。"
+  "modmenu.descriptionTranslation.player_attribute_display": "增加咗一個屬性面板，可以根據需要自行設定顯示嘅屬性。\n\n為咗獲取準確嘅數值，此模組需要客戶端與伺服器溝通，因此於多人遊戲中使用時必須安裝喺伺服器。\n\n更多詳情請查看Github。"
 }
