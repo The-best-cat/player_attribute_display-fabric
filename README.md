@@ -25,9 +25,14 @@ You can configure the decimal place of the value, which ranges from 0 to 5 (incl
 If the value requires some calculations before being displayed, you can provide a mathematical expression. Use **'x'** to represent the original value. Unfortunately, substituting other dynamic values is not supported at the moment.
 
 ## Dependencies
-- [Fzzy Config](https://modrinth.com/mod/fzzy-config) (Required)
-- [Fabric Language Kotlin](https://modrinth.com/mod/fabric-language-kotlin) (Required)
-- [Mod Menu](https://modrinth.com/mod/modmenu) (Optional)
+### Required
+- [Fzzy Config](https://modrinth.com/mod/fzzy-config)
+- [Fabric Language Kotlin](https://modrinth.com/mod/fabric-language-kotlin)
+- [Fabric API](https://modrinth.com/mod/fabric-api)
+
+### Optional
+- [Mod Menu](https://modrinth.com/mod/modmenu) 
+- [Text Placeholder API](https://modrinth.com/mod/placeholder-api) (Required if Mod Menu is installed)
 
 ## Supported Languages
 - English (United States)
@@ -36,4 +41,12 @@ If the value requires some calculations before being displayed, you can provide 
 - Chinese (Traditional Chinese)
 - Chinese (Simplified Chinese)
 
-**This mod is for fabric only. There is currently no plan to make a forge/neoforge version.**<br>And btw, if you're displaying custom attributes, try not to make the names _too_ long, will ya?
+## Plan
+- Allow customisable colours for attribute names and values. (Figuring out how)
+- Allow toggling between displaying final values or values with changes. 
+- Allow pinning attributes and displaying their current values on screen without a panel. (Less likely)
+- Add translations for Korean and Japanese.
+- Allow players to add custom attribute name translations using Json.
+
+**This mod is for fabric only. There is currently no plan to make a forge/neoforge version.**
+<br>And btw, if you're adding custom attributes, try not to make the names _too_ long, will ya?
