@@ -14,6 +14,12 @@
 
   "player_attribute_display.client_config.data": "Display Attributes",
   "player_attribute_display.client_config.data.desc": "This list contains attributes you want to display on the panel, 13 attributes can be displayed at most.\n\nIn each entry, please provide the identifier of the attribute, and configure the decimal place and the number format.\n\nYou can optionally add a prefix and a unit. If you want the attribute value to be displayed after a certain calculation, you can also provide a mathematical expression.",
+  "player_attribute_display.client_config.showDetail": "Show Detail",
+  "player_attribute_display.client_config.showDetail.desc": "If turned on, the values will be displayed as base+change (only base if no change). Press the panel can turn this on/off.",
+  "player_attribute_display.client_config.nameColour": "Attribute Name Colour",
+  "player_attribute_display.client_config.valueColour": "Attribute Value Colour",
+  "player_attribute_display.client_config.positiveDetailColour": "Detail Colour (Increase)",
+  "player_attribute_display.client_config.negativeDetailColour": "Detail Colour (Decrease)",
 
   "player_attribute_display.server_config.data": "Display Attributes",
   "player_attribute_display.server_config.data.desc": "This list contains attributes you want to display on the panel.\n\nIn each entry, please provide the identifier of the attribute, and configure the decimal place and the number format.\n\nYou can optionally add a prefix and a unit. If you want the attribute value to be displayed after a certain calculation, you can also provide a mathematical expression.",

@@ -3,7 +3,6 @@ package net.theblackcat.player_attribute_display.screen;
 import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3i;
 import net.theblackcat.player_attribute_display.PlayerAttributeDisplay;
@@ -28,10 +27,12 @@ public class AttributeScreen extends Screen {
 
     @Override
     protected void init() {
-        this.backgroundWidth = 150;
+        this.backgroundWidth = 170;
         this.backgroundHeight = 165;
         this.x = (this.width - this.backgroundWidth) / 2;
         this.y = (this.height - this.backgroundHeight) / 2;
+
+        this.addDrawableChild(new DetailButtonWidget(this.x + 8, this.y + 20));
     }
 
     @Override
@@ -43,8 +44,20 @@ public class AttributeScreen extends Screen {
         matrices.scale(fontScale);
 
         for (int i = 0; i < Math.min(this.maxAttribute, this.results.size()); i++) {
+            var result = this.results.get(i);
             var pos = this.GetBasePos(12 + gap, 24 + (this.textRenderer.fontHeight + gap) * i, fontScale);
-            context.drawText(this.textRenderer, PlayerAttributeDisplayClient.ParseResultToText(this.results.get(i)), pos.getX(), pos.getY(), 0xFF373737, false);
+
+            if (result.reason() != AttributeDataResult.InvalidReason.NONE) {
+                context.drawText(this.textRenderer, PlayerAttributeDisplayClient.GetInvalidReason(result), pos.getX(), pos.getY(), 0xFFFFFFFF, false);
+            } else {
+                var config = PlayerAttributeDisplayClient.CLIENT_CONFIG;
+                context.drawText(this.textRenderer, PlayerAttributeDisplayClient.ParseResultToUnit(result), pos.getX(), pos.getY(), config.valueColour.toInt(), false);
+                if (config.showDetail) {
+                    context.drawText(this.textRenderer, PlayerAttributeDisplayClient.ParseResultToDetail(result), pos.getX(), pos.getY(), result.currentValue() - result.baseValue() > 0 ? config.positiveDetailColour.toInt() : config.negativeDetailColour.toInt(), false);
+                }
+                context.drawText(this.textRenderer, PlayerAttributeDisplayClient.ParseResultToBaseValue(result), pos.getX(), pos.getY(), config.valueColour.toInt(), false);
+                context.drawText(this.textRenderer, PlayerAttributeDisplayClient.ParseResultToName(result), pos.getX(), pos.getY(), config  .nameColour.toInt(), false);
+            }
         }
 
         matrices.popMatrix();

@@ -13,10 +13,16 @@
   "player_attribute_display.server_config": "伺服器端設定",
 
   "player_attribute_display.client_config.data": "展示屬性",
-  "player_attribute_display.client_config.data.desc": "此列包含你想要在面板上顯示的屬性，最多可顯示13個屬性。\n\n請在每個條目中提供屬性的ID，並設定小數點位和數字格式。\n\n你可以選擇新增前綴和單位，如果希望屬性在某種錶達後顯示"
+  "player_attribute_display.client_config.data.desc": "此列包含你想要在面板上顯示的屬性，最多可顯示13個屬性。\n\n請在每個條目中提供屬性的ID，並設定小數點位和數字格式。\n\n你可以選擇新增前綴和單位，如果希望屬性在某種錶達後顯示",
+  "player_attribute_display.client_config.showDetail": "顯示細節",
+  "player_attribute_display.client_config.showDetail.desc": "啓用後，屬性數值會被顯示為基礎值+變化值（沒有變化則只顯示基礎值）。點按一下屬性面板可以啓用／關閉。",
+  "player_attribute_display.client_config.nameColour": "屬性名字顔色",
+  "player_attribute_display.client_config.valueColour": "屬性數值顔色",
+  "player_attribute_display.client_config.positiveDetailColour": "變化值顔色（提升）",
+  "player_attribute_display.client_config.negativeDetailColour": "變化值顔色（下降）",
 
   "player_attribute_display.server_config.data": "展示屬性",
-  "player_attribute_display.server_config.data.desc": "此列包含你想要在面板上顯示的屬性。\n\n請在每個條目中提供屬性的ID，並設定小數點位和數字格式。\n\n你可以選擇新增前綴和單位，如果希望屬性在經過某種計算後顯示，你也可以提供數學表達式。"
+  "player_attribute_display.server_config.data.desc": "此列包含你想要在面板上顯示的屬性。\n\n請在每個條目中提供屬性的ID，並設定小數點位和數字格式。\n\n你可以選擇新增前綴和單位，如果希望屬性在經過某種計算後顯示，你也可以提供數學表達式。",
   "player_attribute_display.server_config.disableScreen": "停用屬性面板",
   "player_attribute_display.server_config.disableScreen.desc": "啟用後，所有玩家無法開啟屬性面板。",
   "player_attribute_display.server_config.useServerConfig": "使用伺服器端設定",

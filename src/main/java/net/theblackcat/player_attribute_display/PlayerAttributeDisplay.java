@@ -55,20 +55,29 @@ public class PlayerAttributeDisplay implements ModInitializer {
             var entry = Registries.ATTRIBUTE.getEntry(d.attributeId);
             if (!id.add(d.attributeId)) {
                 reason = AttributeDataResult.InvalidReason.REPEATED_ATTRIBUTE;
-            } else if (d.decimalPlaces < 0) {
-                reason = AttributeDataResult.InvalidReason.INVALID_DECIMAL_PLACES;
             } else if (entry.isEmpty()) {
                 reason = AttributeDataResult.InvalidReason.ATTRIBUTE_NOT_EXIST;
             } else if (!player.getAttributes().hasAttribute(entry.get())) {
                 reason = AttributeDataResult.InvalidReason.ATTRIBUTE_NOT_FOUND;
+            } else if (d.decimalPlaces < 0) {
+                reason = AttributeDataResult.InvalidReason.INVALID_DECIMAL_PLACES;
             } else if (!d.expression.isBlank() && !expression.isValid()) {
                 reason = AttributeDataResult.InvalidReason.INVALID_MATHS_EXPRESSION;
             }
 
+            boolean bl2 = d.expression.isBlank();
+            double baseValue = 0d, currentValue = 0d;
+
+            if (reason != AttributeDataResult.InvalidReason.ATTRIBUTE_NOT_FOUND && entry.isPresent()) {
+                baseValue = GetAttributeValue(player, entry.get(), bl2 ? null : expression.get(), true, d.percentage);
+                currentValue = GetAttributeValue(player, entry.get(), bl2 ? null : expression.get(), false, d.percentage);
+            }
+
             values.add(new AttributeDataResult(
-                    reason == AttributeDataResult.InvalidReason.ATTRIBUTE_NOT_EXIST ? null : entry.get().value().getTranslationKey(),
+                    entry.map(ref -> ref.value().getTranslationKey()).orElse(null),
                     d.prefix,
-                    reason == AttributeDataResult.InvalidReason.ATTRIBUTE_NOT_FOUND ? 0d : GetAttributeValue(player, entry.get(), d.expression.isBlank() ? null : expression.get(), d.percentage),
+                    baseValue,
+                    currentValue,
                     d.percentage,
                     d.decimalPlaces,
                     d.unit,
@@ -79,8 +88,8 @@ public class PlayerAttributeDisplay implements ModInitializer {
         return values;
     }
 
-    private static double GetAttributeValue(PlayerEntity player, RegistryEntry<EntityAttribute> attribute, Expression expression, boolean percentage) {
-        double value = player.getAttributeValue(attribute);
+    private static double GetAttributeValue(PlayerEntity player, RegistryEntry<EntityAttribute> attribute, Expression expression, boolean base, boolean percentage) {
+        double value = base ? player.getAttributeBaseValue(attribute) : player.getAttributeValue(attribute);
         if (expression != null) {
             value = expression.evalSafe(Map.of('x', value), value);
         }

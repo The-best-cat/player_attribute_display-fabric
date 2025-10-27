@@ -14,6 +14,13 @@
 
   "player_attribute_display.client_config.data": "展示屬性",
   "player_attribute_display.client_config.data.desc": "此列包含你想顯示喺面板上嘅屬性，最多顯示13個。\n\n請於每個條目中提供屬性ID，並設定小數點位同數字格式。\n\n你可以選擇增加前綴同單位，如果希望屬性喺經過特定計算後先至顯示出嚟，你亦可以提供一條數學式。",
+  "player_attribute_display.client_config.showDetail": "顯示細節",
+  "player_attribute_display.client_config.showDetail.desc": "啓用後，屬性數值會被顯示為基礎值+變化值（冇變化則只顯示基礎值）。點按一下屬性面板可以啓用／關閉。",
+  "player_attribute_display.client_config.nameColour": "屬性名字顔色",
+  "player_attribute_display.client_config.valueColour": "屬性數值顔色",
+  "player_attribute_display.client_config.positiveDetailColour": "變化值顔色（提升）",
+  "player_attribute_display.client_config.negativeDetailColour": "變化值顔色（下降）",
+
 
   "player_attribute_display.server_config.data": "展示屬性",
   "player_attribute_display.server_config.data.desc": "此列包含你想顯示喺面板上嘅屬性，最多顯示13個。\n\n請於每個條目中提供屬性ID，並設定小數點位同數字格式。\n\n你可以選擇增加前綴同單位，如果希望屬性喺經過特定計算後先至顯示出嚟，你亦可以提供一條數學式。",

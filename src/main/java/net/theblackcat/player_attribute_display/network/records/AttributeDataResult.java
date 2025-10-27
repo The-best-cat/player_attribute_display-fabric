@@ -3,13 +3,13 @@ package net.theblackcat.player_attribute_display.network.records;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
-import org.jetbrains.annotations.Nullable;
 
-public record AttributeDataResult(String translationKey, String prefix, double value, boolean percentage, int dp, String unit, InvalidReason reason) {
+public record AttributeDataResult(String translationKey, String prefix, double baseValue, double currentValue, boolean percentage, int dp, String unit, InvalidReason reason) {
     public static final PacketCodec<RegistryByteBuf, AttributeDataResult> PACKET_CODEC = PacketCodec.tuple(
             PacketCodecs.STRING, AttributeDataResult::translationKey,
             PacketCodecs.STRING, AttributeDataResult::prefix,
-            PacketCodecs.DOUBLE, AttributeDataResult::value,
+            PacketCodecs.DOUBLE, AttributeDataResult::baseValue,
+            PacketCodecs.DOUBLE, AttributeDataResult::currentValue,
             PacketCodecs.BOOLEAN, AttributeDataResult::percentage,
             PacketCodecs.INTEGER, AttributeDataResult::dp,
             PacketCodecs.STRING, AttributeDataResult::unit,

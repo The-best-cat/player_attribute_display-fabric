@@ -2,7 +2,7 @@
 	"schemaVersion": 1,
 	"id": "player_attribute_display",
 	"version": "${version}",
-	"name": "",
+	"name": "Player Attribute Display",
 	"description": "",
 	"authors": [
 		"The Black Cat"

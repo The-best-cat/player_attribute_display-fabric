@@ -14,6 +14,12 @@
 
   "player_attribute_display.client_config.data": "展示属性",
   "player_attribute_display.client_config.data.desc": "此列包含你想要在面板上显示的属性，最多可显示13个属性。\n\n请在每个条目中提供属性的ID，并设定小数点位和数字格式。\n\n你可以选择新增前缀和单位，如果希望属性在经过某种计算后显示，你也可以提供数学表达式。",
+  "player_attribute_display.client_config.showDetail": "显示细节",
+  "player_attribute_display.client_config.showDetail.desc": "启用后，属性数值会被显示为基础值+变化值（没有变化则只显示基础值）。点按一下属性面板可以启用／关闭。",
+  "player_attribute_display.client_config.nameColour": "属性名字颜色",
+  "player_attribute_display.client_config.valueColour": "属性数值颜色",
+  "player_attribute_display.client_config.positiveDetailColour": "变化值颜色（提升）",
+  "player_attribute_display.client_config.negativeDetailColour": "变化值颜色（下降）",
 
   "player_attribute_display.server_config.data": "展示属性",
   "player_attribute_display.server_config.data.desc": "此列包含你想要在面板上显示的属性。\n\n请在每个条目中提供属性的ID，并设定小数点位和数字格式。\n\n你可以选择新增前缀和单位，如果希望属性在经过某种计算后显示，你也可以提供数学表达式。",

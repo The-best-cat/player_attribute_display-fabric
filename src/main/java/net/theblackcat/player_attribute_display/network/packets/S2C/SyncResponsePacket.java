@@ -10,7 +10,7 @@ import net.theblackcat.player_attribute_display.network.records.AttributeDataRes
 import java.util.List;
 
 public record SyncResponsePacket(List<AttributeDataResult> results) implements CustomPayload {
-    public static final Id<SyncResponsePacket> ID = new Id<>(PlayerAttributeDisplay.GetId("sbd"));
+    public static final Id<SyncResponsePacket> ID = new Id<>(PlayerAttributeDisplay.GetId("srp"));
     public static final PacketCodec<RegistryByteBuf, SyncResponsePacket> CODEC = PacketCodec.tuple(
             AttributeDataResult.PACKET_CODEC.collect(PacketCodecs.toList()), SyncResponsePacket::results,
             SyncResponsePacket::new

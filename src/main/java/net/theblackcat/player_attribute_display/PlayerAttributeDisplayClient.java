@@ -11,11 +11,10 @@ import net.minecraft.util.Formatting;
 import net.theblackcat.player_attribute_display.config.ClientConfig;
 import net.theblackcat.player_attribute_display.event.ModKeyBindings;
 import net.theblackcat.player_attribute_display.network.PacketRegistryClient;
-import net.theblackcat.player_attribute_display.network.packets.C2S.RequestSyncPayload;
+import net.theblackcat.player_attribute_display.network.packets.C2S.RequestOpenPanelPayload;
 import net.theblackcat.player_attribute_display.network.records.AttributeDataResult;
 import net.theblackcat.player_attribute_display.screen.AttributeData;
 
-import java.security.InvalidParameterException;
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class PlayerAttributeDisplayClient implements ClientModInitializer {
             if (client != null && client.player != null && client.world != null && !client.isPaused()) {
                 if (!PlayerAttributeDisplay.SERVER_CONFIG.useServerConfig || !PlayerAttributeDisplay.SERVER_CONFIG.disableScreen) {
                     while (ModKeyBindings.openScreen.wasPressed()) {
-                        ClientPlayNetworking.send(new RequestSyncPayload(GetData()));
+                        ClientPlayNetworking.send(new RequestOpenPanelPayload(GetData()));
                     }
                 }
             }
@@ -42,25 +41,49 @@ public class PlayerAttributeDisplayClient implements ClientModInitializer {
         return PlayerAttributeDisplay.SERVER_CONFIG.useServerConfig ? PlayerAttributeDisplay.SERVER_CONFIG.GetData() : CLIENT_CONFIG.GetData();
     }
 
-    public static Text ParseResultToText(AttributeDataResult result) {
+    public static Text GetInvalidReason(AttributeDataResult result) {
         MutableText text = Text.empty();
+        String invalidKey = AttributeDataResult.InvalidReason.GetTranslationKey(result.reason());
+        text.append(PlayerAttributeDisplay.Translate(invalidKey));
+        text.formatted(Formatting.DARK_RED);
+        return text;
+    }
 
-        if (result.reason() != AttributeDataResult.InvalidReason.NONE) {
-            String invalidKey = AttributeDataResult.InvalidReason.GetTranslationKey(result.reason());
-            text.append(PlayerAttributeDisplay.Translate(invalidKey));
-            text.formatted(Formatting.DARK_RED);
-            return text;
-        }
-
+    //to, as in up to
+    public static Text ParseResultToName(AttributeDataResult result) {
+        MutableText text = Text.empty();
         text.append(Text.translatable(result.translationKey()));
-        //text.formatted(Formatting.byColorIndex(CLIENT_CONFIG.attributeColour.toInt()));
         text.append(": ");
+        return text;
+    }
 
+    public static Text ParseResultToBaseValue(AttributeDataResult result) {
+        MutableText text = Text.empty();
+        text.append(ParseResultToName(result));
         text.append(result.prefix());
-        text.append(DecimalFormat(result.dp(), result.value()));
-        if (result.percentage()) text.append("%");
+        text.append(DecimalFormat(result.dp(), PlayerAttributeDisplayClient.CLIENT_CONFIG.showDetail ? result.baseValue() : result.currentValue()));
+        return text;
+    }
+
+    public static Text ParseResultToDetail(AttributeDataResult result) {
+        MutableText text = Text.empty();
+        text.append(ParseResultToBaseValue(result));
+        if (PlayerAttributeDisplayClient.CLIENT_CONFIG.showDetail) {
+            double changed = result.currentValue() - result.baseValue();
+            if (changed != 0) {
+                text.append("(").append(changed > 0 ? "+" : "").append(DecimalFormat(result.dp(), changed)).append(")");
+            }
+        }
+        return text;
+    }
+
+    public static Text ParseResultToUnit(AttributeDataResult result) {
+        MutableText text = Text.empty();
+        text.append(ParseResultToDetail(result));
+        if (result.percentage()) {
+            text.append("%");
+        }
         text.append(result.unit());
-        //text.formatted(Formatting.byColorIndex(CLIENT_CONFIG.valueColour.toInt()));
         return text;
     }
 

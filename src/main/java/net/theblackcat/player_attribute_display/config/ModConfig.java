@@ -28,7 +28,7 @@ public class ModConfig extends Config {
     public ValidatedList<AttributeConfigData> data = new ValidatedAny<>(new AttributeConfigData()).toList(
             new AttributeConfigData(GetAttributeId(EntityAttributes.ATTACK_DAMAGE), 1),
             new AttributeConfigData(GetAttributeId(EntityAttributes.ATTACK_SPEED), 0),
-            new AttributeConfigData(GetAttributeId(EntityAttributes.SWEEPING_DAMAGE_RATIO), "+", AttributeConfigData.NumberFormat.PERCENTAGE, 1, "", ""),
+            new AttributeConfigData(GetAttributeId(EntityAttributes.SWEEPING_DAMAGE_RATIO), "", AttributeConfigData.NumberFormat.PERCENTAGE, 1, "", ""),
             new AttributeConfigData(GetAttributeId(EntityAttributes.ARMOR), 0),
             new AttributeConfigData(GetAttributeId(EntityAttributes.ARMOR_TOUGHNESS), 0),
             new AttributeConfigData(GetAttributeId(EntityAttributes.MOVEMENT_SPEED), "", AttributeConfigData.NumberFormat.RAW, 1, "m/s", "x * 43.17")
