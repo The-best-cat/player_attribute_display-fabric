@@ -1,11 +1,13 @@
 # Player Attribute Display
 This mod adds a panel that displays a list of attribute values.
 
-In order to obtain accurate values, this mod requires client-server communication, so it **MUST** be installed on **BOTH** the client and server in multiplayers environments.
+In order to obtain accurate values, this mod requires client-server communication, so it **MUST** be installed on **BOTH** the client and server in multiplayer environments.
 
 This mod includes a server config and a client config. 
 - If the server config is **enabled**, all players will display the same set of attributes. The panel can be disabled for all players as well.
 - If the server config is **disabled**, each player can configure their own panel individually.
+- You can change the colour of the attribute names, values and details in the client config.
+- You can enable or disable showing details in the client config or by simply clicking the panel.
 
 The default keybind to open the panel is **'Tab'**.
 
@@ -20,7 +22,7 @@ You can configure the number format of the displayed value:
 - Raw: Default. The value is displayed as-is.
 - Percentage: The value is multiplied by 100 and the % symbol is added.
   
-You can configure the decimal place of the value, which ranges from 0 to 5 (inclusive). If it is 0, the value is displayed as a rounded integer.
+You can configure the number of decimal places of the value, which ranges from 0 to 5 (inclusive). The number is rounded off.
 
 If the value requires some calculations before being displayed, you can provide a mathematical expression. Use **'x'** to represent the original value. Unfortunately, substituting other dynamic values is not supported at the moment.
 
@@ -42,10 +44,8 @@ If the value requires some calculations before being displayed, you can provide 
 - Chinese (Simplified Chinese)
 
 ## Plan
-- Allow customisable colours for attribute names and values. (Figuring out how)
-- Allow toggling between displaying final values or values with changes. 
-- Allow pinning attributes and displaying their current values on screen without a panel. (Less likely)
-- Add translations for Korean and Japanese.
+- Allow pinning attributes and displaying their current values on screen without a panel. (less likely)
+- Add translations for Korean and Japanese. (procrastinating)
 - Allow players to add custom attribute name translations using Json.
 
-**This mod is for fabric only. There is currently no plan to make a forge/neoforge version.**<br>And btw, if you're adding custom attributes, try not to make the names _too_ long, will ya?
+### This mod is for fabric only. There is currently no plan to make a forge/neoforge version.
