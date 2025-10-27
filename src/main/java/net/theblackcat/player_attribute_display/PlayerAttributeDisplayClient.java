@@ -49,42 +49,35 @@ public class PlayerAttributeDisplayClient implements ClientModInitializer {
         return text;
     }
 
-    //to, as in up to
-    public static Text ParseResultToName(AttributeDataResult result) {
-        MutableText text = Text.empty();
-        text.append(Text.translatable(result.translationKey()));
-        text.append(": ");
-        return text;
-    }
-
-    public static Text ParseResultToBaseValue(AttributeDataResult result) {
-        MutableText text = Text.empty();
-        text.append(ParseResultToName(result));
-        text.append(result.prefix());
-        text.append(DecimalFormat(result.dp(), PlayerAttributeDisplayClient.CLIENT_CONFIG.showDetail ? result.baseValue() : result.currentValue()));
-        return text;
-    }
-
-    public static Text ParseResultToDetail(AttributeDataResult result) {
-        MutableText text = Text.empty();
-        text.append(ParseResultToBaseValue(result));
-        if (PlayerAttributeDisplayClient.CLIENT_CONFIG.showDetail) {
+    public static Quartet<Text, Text, Text, Text> ParseResultToText(AttributeDataResult result) {
+        boolean showDetail = PlayerAttributeDisplayClient.CLIENT_CONFIG.showDetail;
+    
+        MutableText name = Text.empty()
+                .append(Text.translatable(result.translationKey()))
+                .append(": ");
+    
+        MutableText base = Text.empty()
+                .append(result.prefix())
+                .append(DecimalFormat(result.dp(), showDetail ? result.baseValue() : result.currentValue()));
+   
+        MutableText detail = Text.empty();
+        if (showDetail) {
             double changed = result.currentValue() - result.baseValue();
             if (changed != 0) {
-                text.append("(").append(changed > 0 ? "+" : "").append(DecimalFormat(result.dp(), changed)).append(")");
+                detailText.append("(")
+                        .append(changed > 0 ? "+" : "")
+                        .append(DecimalFormat(result.dp(), changed))
+                        .append(")");
             }
         }
-        return text;
-    }
-
-    public static Text ParseResultToUnit(AttributeDataResult result) {
-        MutableText text = Text.empty();
-        text.append(ParseResultToDetail(result));
+    
+        MutableText unit = Text.empty();
         if (result.percentage()) {
-            text.append("%");
+            unitText.append("%");
         }
-        text.append(result.unit());
-        return text;
+        unitText.append(result.unit());
+    
+        return new Quartet<>(nameText, baseText, detailText, unitText);
     }
 
     private static String DecimalFormat(int dp, double value) {
