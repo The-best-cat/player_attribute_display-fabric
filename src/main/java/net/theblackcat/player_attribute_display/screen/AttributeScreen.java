@@ -38,29 +38,62 @@ public class AttributeScreen extends Screen {
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float deltaTicks) {
         this.RenderTitle(context);
-
+    
         var matrices = context.getMatrices();
         matrices.pushMatrix();
         matrices.scale(fontScale);
-
+    
         for (int i = 0; i < Math.min(this.maxAttribute, this.results.size()); i++) {
             var result = this.results.get(i);
             var pos = this.GetBasePos(12 + gap, 24 + (this.textRenderer.fontHeight + gap) * i, fontScale);
-
+    
             if (result.reason() != AttributeDataResult.InvalidReason.NONE) {
-                context.drawText(this.textRenderer, PlayerAttributeDisplayClient.GetInvalidReason(result), pos.getX(), pos.getY(), 0xFFFFFFFF, false);
+                DrawText(
+                    context,
+                    PlayerAttributeDisplayClient.GetInvalidReason(result),
+                    pos,
+                    0xFFFFFFFF
+                );
             } else {
                 var config = PlayerAttributeDisplayClient.CLIENT_CONFIG;
-                context.drawText(this.textRenderer, PlayerAttributeDisplayClient.ParseResultToUnit(result), pos.getX(), pos.getY(), config.valueColour.toInt(), false);
+                var texts = PlayerAttributeDisplayClient.ParseResultToText(result);
+    
+                // unit
+                var unitLayer = Text.empty()
+                        .append(texts.first())
+                        .append(texts.second())
+                        .append(texts.third())
+                        .append(texts.fourth());
+                DrawText(context, unitLayer, pos, config.valueColour.toInt());
+    
+                // detail
                 if (config.showDetail) {
-                    context.drawText(this.textRenderer, PlayerAttributeDisplayClient.ParseResultToDetail(result), pos.getX(), pos.getY(), result.currentValue() - result.baseValue() > 0 ? config.positiveDetailColour.toInt() : config.negativeDetailColour.toInt(), false);
+                    var detailLayer = Text.empty()
+                            .append(texts.first())
+                            .append(texts.second())
+                            .append(texts.third());
+                    int detailColor = result.currentValue() - result.baseValue() > 0
+                            ? config.positiveDetailColour.toInt()
+                            : config.negativeDetailColour.toInt();
+                    DrawText(context, detailLayer, pos, detailColor);
                 }
-                context.drawText(this.textRenderer, PlayerAttributeDisplayClient.ParseResultToBaseValue(result), pos.getX(), pos.getY(), config.valueColour.toInt(), false);
-                context.drawText(this.textRenderer, PlayerAttributeDisplayClient.ParseResultToName(result), pos.getX(), pos.getY(), config  .nameColour.toInt(), false);
+    
+                // base
+                var baseLayer = Text.empty()
+                        .append(texts.first())
+                        .append(texts.second());
+                DrawText(context, baseLayer, pos, config.valueColour.toInt());
+    
+                // name
+                DrawText(context, texts.first(), pos, config.nameColour.toInt());
             }
         }
-
+    
         matrices.popMatrix();
+    }
+
+    private void DrawText(DrawContext context, Text text, Vec3i pos, int colour) {
+        context.drawText(this.textRenderer, text, pos.getX(), pos.getY(), colour, false);
     }
 
     private void RenderTitle(DrawContext context) {
