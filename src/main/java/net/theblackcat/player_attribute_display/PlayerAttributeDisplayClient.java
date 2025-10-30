@@ -14,8 +14,10 @@ import net.theblackcat.player_attribute_display.network.PacketRegistryClient;
 import net.theblackcat.player_attribute_display.network.packets.C2S.RequestOpenPanelPayload;
 import net.theblackcat.player_attribute_display.network.records.AttributeDataResult;
 import net.theblackcat.player_attribute_display.screen.AttributeData;
+import oshi.util.tuples.Quartet;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerAttributeDisplayClient implements ClientModInitializer {
@@ -49,35 +51,41 @@ public class PlayerAttributeDisplayClient implements ClientModInitializer {
         return text;
     }
 
-    public static Quartet<Text, Text, Text, Text> ParseResultToText(AttributeDataResult result) {
+    public static Text[] ParseResultToText(AttributeDataResult result) {
         boolean showDetail = PlayerAttributeDisplayClient.CLIENT_CONFIG.showDetail;
-    
+
         MutableText name = Text.empty()
                 .append(Text.translatable(result.translationKey()))
                 .append(": ");
-    
+
         MutableText base = Text.empty()
                 .append(result.prefix())
                 .append(DecimalFormat(result.dp(), showDetail ? result.baseValue() : result.currentValue()));
-   
+
         MutableText detail = Text.empty();
         if (showDetail) {
             double changed = result.currentValue() - result.baseValue();
             if (changed != 0) {
-                detailText.append("(")
+                detail.append("(")
                         .append(changed > 0 ? "+" : "")
                         .append(DecimalFormat(result.dp(), changed))
                         .append(")");
             }
         }
-    
+
         MutableText unit = Text.empty();
         if (result.percentage()) {
-            unitText.append("%");
+            unit.append("%");
         }
-        unitText.append(result.unit());
-    
-        return new Quartet<>(nameText, baseText, detailText, unitText);
+        unit.append(result.unit());
+
+        var texts = new Text[4];
+        texts[0] = name;
+        texts[1] = base;
+        texts[2] = detail;
+        texts[3] = unit;
+
+        return texts;
     }
 
     private static String DecimalFormat(int dp, double value) {

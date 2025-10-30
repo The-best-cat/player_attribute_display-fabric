@@ -3,6 +3,8 @@ package net.theblackcat.player_attribute_display.screen;
 import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3i;
 import net.theblackcat.player_attribute_display.PlayerAttributeDisplay;
@@ -38,62 +40,56 @@ public class AttributeScreen extends Screen {
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float deltaTicks) {
         this.RenderTitle(context);
-    
+
         var matrices = context.getMatrices();
         matrices.pushMatrix();
         matrices.scale(fontScale);
-    
+
         for (int i = 0; i < Math.min(this.maxAttribute, this.results.size()); i++) {
             var result = this.results.get(i);
             var pos = this.GetBasePos(12 + gap, 24 + (this.textRenderer.fontHeight + gap) * i, fontScale);
-    
+
             if (result.reason() != AttributeDataResult.InvalidReason.NONE) {
                 DrawText(
-                    context,
-                    PlayerAttributeDisplayClient.GetInvalidReason(result),
-                    pos,
-                    0xFFFFFFFF
+                        context,
+                        PlayerAttributeDisplayClient.GetInvalidReason(result),
+                        pos,
+                        0xFFFFFFFF
                 );
             } else {
                 var config = PlayerAttributeDisplayClient.CLIENT_CONFIG;
-                var texts = PlayerAttributeDisplayClient.ParseResultToText(result);
-    
-                // unit
-                var unitLayer = Text.empty()
-                        .append(texts.first())
-                        .append(texts.second())
-                        .append(texts.third())
-                        .append(texts.fourth());
-                DrawText(context, unitLayer, pos, config.valueColour.toInt());
-    
+                var parts = PlayerAttributeDisplayClient.ParseResultToText(result);
+
+                //unit
+                DrawText(context, CombineTexts(parts, 4), pos, config.valueColour.toInt());
+
                 // detail
                 if (config.showDetail) {
-                    var detailLayer = Text.empty()
-                            .append(texts.first())
-                            .append(texts.second())
-                            .append(texts.third());
-                    int detailColor = result.currentValue() - result.baseValue() > 0
-                            ? config.positiveDetailColour.toInt()
-                            : config.negativeDetailColour.toInt();
-                    DrawText(context, detailLayer, pos, detailColor);
+                    int detailColor = result.currentValue() - result.baseValue() > 0 ? config.positiveDetailColour.toInt() : config.negativeDetailColour.toInt();
+                    DrawText(context, CombineTexts(parts, 3), pos, detailColor);
                 }
-    
+
                 // base
-                var baseLayer = Text.empty()
-                        .append(texts.first())
-                        .append(texts.second());
-                DrawText(context, baseLayer, pos, config.valueColour.toInt());
-    
+                DrawText(context, CombineTexts(parts, 2), pos, config.valueColour.toInt());
+
                 // name
-                DrawText(context, texts.first(), pos, config.nameColour.toInt());
+                DrawText(context, parts[0], pos, config.nameColour.toInt());
             }
         }
-    
+
         matrices.popMatrix();
     }
 
     private void DrawText(DrawContext context, Text text, Vec3i pos, int colour) {
         context.drawText(this.textRenderer, text, pos.getX(), pos.getY(), colour, false);
+    }
+
+    private Text CombineTexts(Text[] parts, int amount) {
+        MutableText text = Text.empty();
+        for (int i = 0; i < amount; i++) {
+            text.append(parts[i]);
+        }
+        return text;
     }
 
     private void RenderTitle(DrawContext context) {
